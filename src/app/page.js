@@ -1,5 +1,6 @@
 import Navbar from "@/components/navigation/Navbar";
 import Hero from "@/components/hero/Hero";
+import TitleLoop from "@/components/hero/TitleLoop";
 import IdentityStrip from "@/components/sections/IdentityStrip";
 import ProjectsSection from "@/components/projects/ProjectsSection";
 import ExperienceLedger from "@/components/experience/ExperienceLedger";
@@ -24,6 +25,7 @@ export default function Home() {
       <Navbar />
       <main id="main">
         <Hero />
+        <TitleLoop />
         <IdentityStrip />
         <ProjectsSection />
         <ExperienceLedger />

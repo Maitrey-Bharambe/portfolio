@@ -26,7 +26,8 @@ function Detail({ label, children }) {
 function PendingCard({ project, tilt }) {
   return (
     <article
-      className="card on-dark-none bg-field p-6 sm:p-8 lg:col-span-2"
+      id={project.id}
+      className="card on-dark-none scroll-mt-20 bg-field p-6 sm:p-8 lg:col-span-2"
       style={{ "--tilt": tilt }}
       aria-labelledby={`${project.id}-title`}
     >
@@ -74,7 +75,8 @@ export default function ProjectCard({ project, index }) {
 
   return (
     <article
-      className={cx("card flex flex-col", spans && "lg:col-span-2")}
+      id={project.id}
+      className={cx("card flex flex-col scroll-mt-20", spans && "lg:col-span-2")}
       style={{ "--tilt": tilt }}
       aria-labelledby={`${project.id}-title`}
     >

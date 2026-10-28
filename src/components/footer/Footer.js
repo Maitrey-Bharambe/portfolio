@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { profile } from "@/data/profile";
 
 export default function Footer() {
@@ -6,7 +7,7 @@ export default function Footer() {
     <footer className="on-dark border-t-4 border-ink bg-ink text-ground">
       <div className="wrap flex flex-col gap-3 py-8 md:flex-row md:items-center md:justify-between">
         <p className="flex items-center gap-4">
-          <span className="bg-emphasis px-3 py-1 text-xl font-black text-ink">{profile.brand}</span>
+          <Image src="/images/logo.png" alt="" width={40} height={40} className="h-10 w-10 border-[3px] border-emphasis" />
           <span className="font-black uppercase tracking-tight">{profile.name}</span>
         </p>
         <p className="mono">{profile.tagline}</p>

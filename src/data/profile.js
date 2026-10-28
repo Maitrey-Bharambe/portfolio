@@ -30,6 +30,9 @@ export const hero = {
   interests: ["Data Science", "Machine Learning", "AI Systems", "Software"],
 };
 
+// Titles that loop along the full-width band under the hero.
+export const loopTitles = ["Data Scientist", "AI Engineer", "Technical General Manager", "Creative Developer"];
+
 export const identity = [
   {
     n: "01",

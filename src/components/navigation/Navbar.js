@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { navItems, profile } from "@/data/profile";
 import MobileMenu from "./MobileMenu";
 
@@ -5,8 +6,8 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b-4 border-ink bg-ground">
       <div className="wrap relative flex h-14 items-center justify-between gap-4">
-        <a href="#top" className="bg-ink px-3 py-1 text-xl font-black tracking-tight text-emphasis" aria-label={`${profile.name}, back to top`}>
-          {profile.brand}
+        <a href="#top" className="block" aria-label={`${profile.name}, back to top`}>
+          <Image src="/images/logo.png" alt="" width={40} height={40} priority className="h-10 w-10 border-[3px] border-ink" />
         </a>
 
         <div className="flex items-center gap-4">
