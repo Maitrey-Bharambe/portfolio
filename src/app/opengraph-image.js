@@ -25,7 +25,7 @@ export default function OpengraphImage() {
           fontWeight: 900,
         }}
       >
-        <div style={{ display: "flex", fontSize: 28, color: "#000" }}>MB/ — DATA × AI × ENGINEERING</div>
+        <div style={{ display: "flex", fontSize: 28, color: "#000" }}>MB/ — DATA SCIENCE & AI ENGINEERING</div>
         <div style={{ display: "flex", flexDirection: "column", fontSize: 120, lineHeight: 1.05, alignItems: "flex-start" }}>
           {strip("#000", "#ffed00", "BUILDING")}
           {strip("#ffed00", "#000", "INTELLIGENCE.")}

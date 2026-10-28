@@ -59,17 +59,16 @@ export default function Hero() {
             <ArrowTile className="absolute right-12 top-12 hidden h-32 w-32 rotate-6 lg:grid xl:h-36 xl:w-36" />
 
             {/* Small screens: framed portrait under the headline. */}
-            <div className="mt-6 w-44 overflow-hidden border-4 border-ink bg-signal pt-6 sm:w-56 lg:hidden" style={{ boxShadow: "var(--shadow) var(--shadow) 0 var(--dp-color-ink)" }}>
-              <Image src={portrait.src} alt={portrait.alt} width={portrait.width} height={portrait.height} sizes="224px" priority className="mx-auto h-auto w-[88%]" />
+            <div className="mx-auto mt-6 w-56 overflow-hidden border-4 border-ink bg-signal pt-6 sm:w-64 lg:hidden" style={{ boxShadow: "var(--shadow) var(--shadow) 0 var(--dp-color-ink)" }}>
+              <Image src={portrait.src} alt={portrait.alt} width={portrait.width} height={portrait.height} sizes="256px" priority className="mx-auto h-auto w-[88%]" />
             </div>
 
-            {/* Large screens: cut-out standing on the violet band, over a red block. */}
-            <div className="pointer-events-none absolute bottom-0 right-8 hidden lg:block xl:right-12">
-              <div aria-hidden="true" className="absolute inset-x-3 bottom-0 top-[34%] border-4 border-ink bg-signal" />
-              <Image src={portrait.src} alt={portrait.alt} width={portrait.width} height={portrait.height} sizes="360px" priority className="relative h-[440px] w-auto xl:h-[520px]" />
+            {/* Large screens: portrait in a full red panel, standing on the violet band. */}
+            <div className="pointer-events-none absolute bottom-0 right-8 hidden border-4 border-b-0 border-ink bg-signal px-3 pt-8 lg:block xl:right-12 xl:px-4 xl:pt-10">
+              <Image src={portrait.src} alt={portrait.alt} width={portrait.width} height={portrait.height} sizes="300px" priority className="h-[310px] w-auto xl:h-[450px]" />
             </div>
 
-            <div className="mt-8 grid gap-8 md:mt-12 lg:mr-[300px] lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] lg:items-end xl:mr-[340px]">
+            <div className="mt-8 grid gap-8 md:mt-12 lg:mr-[260px] lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] lg:items-end xl:mr-[340px]">
               <p className="poster bg-contrast p-5 text-[length:var(--dp-typography-body)] leading-snug lg:-rotate-1">
                 {hero.intro}
               </p>

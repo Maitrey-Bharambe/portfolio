@@ -6,7 +6,7 @@ export const profile = {
   brand: "MB/",
   title: "Data Scientist × AI Engineer × Creative Developer",
   location: "Mumbai, India",
-  tagline: "Data × AI × Engineering",
+  tagline: "Data Science & AI Engineering",
   email: "maitrey.bharambe24@gmail.com",
   github: "https://github.com/Maitrey-Bharambe",
   linkedin: "https://www.linkedin.com/in/maitrey-bharambe-677088331",
@@ -24,7 +24,7 @@ export const navItems = [
 
 export const hero = {
   lines: ["Building", "Intelligence.", "Beyond", "The model."],
-  meta: "Mumbai, India / Data × AI × Engineering",
+  meta: "Mumbai, India / Data Science & AI Engineering",
   intro:
     "I'm Maitrey, a data scientist and AI engineer working across machine learning, data systems, and creative software. I turn messy data and complex models into systems people can actually use.",
   interests: ["Data Science", "Machine Learning", "AI Systems", "Software"],
