@@ -12,7 +12,7 @@ export default function ProjectsSection() {
           title="Selected work."
           sub="Systems built / Models tested / Ideas shipped"
         />
-        <div className="grid items-start gap-8 lg:grid-cols-2 lg:gap-10">
+        <div className="grid items-stretch gap-10 lg:grid-cols-2 lg:gap-12">
           {projects.map((project, i) => (
             <ProjectCard key={project.id} project={project} index={i} />
           ))}

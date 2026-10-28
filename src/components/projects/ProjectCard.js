@@ -1,18 +1,20 @@
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Plus } from "lucide-react";
 import Button from "@/components/ui/Button";
 import ProjectDiagram from "./ProjectDiagram";
 import { cx } from "@/lib/utils";
 
-// Header band colour and diagram panel colour per project type.
-const theme = {
-  pipeline: { head: "bg-field", panel: "bg-field" },
-  classifier: { head: "bg-ground", panel: "bg-ground" },
-  vision: { head: "bg-emphasis", panel: "bg-ground" },
-  devtool: { head: "bg-ink text-emphasis", panel: "bg-contrast" },
-  rl: { head: "stripe-racing", panel: "bg-ground" },
-  software: { head: "bg-ground", panel: "bg-ground" },
+// Colour of the visual panel per project type.
+const panelColor = {
+  pipeline: "bg-field",
+  classifier: "bg-signal",
+  vision: "bg-emphasis",
+  devtool: "bg-field",
+  rl: "stripe-racing",
+  software: "bg-field",
 };
+// Tape strip colours alternate so neighbouring cards do not match.
+const tapeColor = ["bg-emphasis", "bg-signal", "bg-field", "bg-contrast"];
 
 function Detail({ label, children }) {
   return (
@@ -23,33 +25,10 @@ function Detail({ label, children }) {
   );
 }
 
-function PendingCard({ project, tilt }) {
-  return (
-    <article
-      id={project.id}
-      className="card on-dark-none scroll-mt-20 bg-field p-6 sm:p-8 lg:col-span-2"
-      style={{ "--tilt": tilt }}
-      aria-labelledby={`${project.id}-title`}
-    >
-      <div className="mono mb-4 flex flex-wrap items-center gap-3">
-        <span>{project.code}</span>
-        <span className="border-2 border-ink bg-ink px-2 py-0.5 text-emphasis">{project.category}</span>
-      </div>
-      <h3 id={`${project.id}-title`} className="display text-[clamp(2.6rem,10vw,7.5rem)]">
-        {project.name}
-      </h3>
-      <p className="mt-5 max-w-[52ch] border-l-4 border-ink pl-4 text-[length:var(--dp-typography-reading)]">
-        {project.pendingNote}
-      </p>
-      <Links project={project} />
-    </article>
-  );
-}
-
 function Links({ project }) {
   if (!project.githubUrl && !project.liveUrl) return null;
   return (
-    <div className="mt-5 flex flex-wrap gap-3">
+    <div className="mt-auto flex flex-wrap gap-3 pt-5">
       {project.githubUrl && (
         <Button href={project.githubUrl} external small variant="ink">
           GitHub <ArrowUpRight size={16} strokeWidth={3} aria-hidden />
@@ -64,44 +43,115 @@ function Links({ project }) {
   );
 }
 
-export default function ProjectCard({ project, index }) {
-  const tilt = project.featured ? "0deg" : index % 2 === 0 ? "-0.4deg" : "0.4deg";
-  if (project.projectType === "pending") return <PendingCard project={project} tilt={tilt} />;
-
-  const t = theme[project.projectType] ?? theme.software;
-  const hasDiagram = project.diagram?.steps?.length > 0;
-  const { image, architecture } = project;
-  const spans = project.featured || project.wide;
-
+function Tape({ index }) {
   return (
-    <article
-      id={project.id}
-      className={cx("card flex flex-col scroll-mt-20", spans && "lg:col-span-2")}
-      style={{ "--tilt": tilt }}
-      aria-labelledby={`${project.id}-title`}
-    >
-      <div className={cx("mono flex flex-wrap items-center justify-between gap-2 border-b-4 border-ink px-4 py-2", t.head)}>
-        <span className={project.projectType === "rl" ? "bg-emphasis px-2 py-0.5 text-ink" : ""}>
-          {project.code} / {project.category}
-        </span>
+    <span
+      aria-hidden="true"
+      className={cx(
+        "absolute -top-3 z-10 h-6 w-20 border-2 border-ink",
+        tapeColor[index % tapeColor.length],
+        index % 2 === 0 ? "left-6 -rotate-3" : "right-6 rotate-3"
+      )}
+    />
+  );
+}
+
+function Header({ project, index }) {
+  return (
+    <div className="flex items-start justify-between gap-3 border-b-4 border-ink px-4 pb-3 pt-5 sm:px-5">
+      <span className="num-outline display text-6xl leading-[0.8] sm:text-7xl" aria-hidden="true">
+        {String(index + 1).padStart(2, "0")}
+      </span>
+      <div className="flex min-w-0 flex-col items-end gap-2 text-right">
+        <span className="sr-only">{project.code}</span>
+        <p className="mono max-w-[26ch] bg-ink px-2 py-1 text-emphasis">{project.category}</p>
         {project.achievement && (
-          <span className="border-2 border-ink bg-signal px-2 py-0.5 font-black text-ink lg:-rotate-2">
-            {project.achievement}
+          <span className="mono -rotate-3 border-[3px] border-ink bg-signal px-2 py-0.5 font-black text-ink">
+            ★ {project.achievement}
           </span>
         )}
       </div>
+    </div>
+  );
+}
 
-      <div className={cx("grid flex-1", spans && "lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]")}>
-        <div className="p-5 sm:p-6">
-          <h3 id={`${project.id}-title`} className={cx("display", project.featured ? "text-[clamp(2.2rem,5.5vw,4.4rem)]" : "text-[clamp(1.9rem,3.6vw,3rem)]")}>
-            {project.name}
-          </h3>
-          {project.shortDescription && (
-            <p className="mt-4 text-[length:var(--dp-typography-body)] leading-snug">{project.shortDescription}</p>
-          )}
+function Media({ project, index, showcase }) {
+  const { image, architecture } = project;
+  const hasDiagram = project.diagram?.steps?.length > 0;
+  if (!hasDiagram && !image && !architecture) return null;
+  const shots = [
+    image && { ...image, caption: "Screenshot" },
+    architecture && { ...architecture, caption: architecture.caption ?? "Architecture" },
+  ].filter(Boolean);
 
-          <dl className="mt-5 space-y-4 border-t-[3px] border-ink pt-5">
-            {project.problem && <Detail label="Problem">{project.problem}</Detail>}
+  return (
+    <div
+      className={cx(
+        "flex h-full flex-col justify-center gap-6 border-b-4 border-ink p-4 sm:p-5",
+        panelColor[project.projectType] ?? panelColor.software,
+        showcase ? "lg:border-b-0 lg:p-6" : "min-h-[190px]",
+        showcase && "lg:border-l-4"
+      )}
+    >
+      {shots.map((shot, i) => (
+        <figure key={shot.src} className={cx("relative", showcase && (i % 2 === 0 ? "lg:-rotate-1" : "lg:rotate-1"))}>
+          <Image
+            src={shot.src}
+            alt={shot.alt}
+            width={shot.width}
+            height={shot.height}
+            sizes={showcase ? "(min-width: 1024px) 40vw, 100vw" : "(min-width: 1024px) 30vw, 100vw"}
+            className="h-auto w-full border-[3px] border-ink bg-contrast"
+            style={{ boxShadow: "5px 5px 0 var(--dp-color-ink)" }}
+          />
+          <figcaption className="mono absolute -top-3 left-3 border-2 border-ink bg-emphasis px-2 py-0.5">
+            {shot.caption}
+          </figcaption>
+        </figure>
+      ))}
+      {hasDiagram && (
+        <div className={cx(shots.length > 0 && "border-[3px] border-ink bg-contrast p-3")}>
+          <ProjectDiagram diagram={project.diagram} projectType={project.projectType} />
+        </div>
+      )}
+    </div>
+  );
+}
+
+function Body({ project, showcase }) {
+  const hasMore = project.implementation?.length > 0 || project.contribution || project.results?.length > 0;
+  return (
+    <div className="flex flex-1 flex-col p-4 sm:p-5">
+      <h3
+        id={`${project.id}-title`}
+        className={cx(
+          "display",
+          showcase ? "text-[clamp(2.2rem,5vw,3.4rem)]" : "min-h-[1.84em] text-[clamp(1.9rem,3.4vw,2.8rem)]"
+        )}
+      >
+        {project.name}
+      </h3>
+      {project.shortDescription && (
+        <p className={cx("mt-3 text-[length:var(--dp-typography-reading)] leading-snug", !showcase && "line-clamp-4")}>
+          {project.shortDescription}
+        </p>
+      )}
+      {project.problem && (
+        <p className="mt-4 border-l-4 border-ink pl-3 text-[length:var(--dp-typography-small)] leading-snug">
+          <span className="mono mr-2 bg-emphasis px-1.5">Why</span>
+          {project.problem}
+        </p>
+      )}
+
+      {hasMore && (
+        <details className="group/more mt-4 border-t-[3px] border-ink pt-3" open={showcase}>
+          <summary className="mono flex cursor-pointer list-none items-center justify-between [&::-webkit-details-marker]:hidden">
+            <span>How it was built</span>
+            <span className="grid h-6 w-6 place-items-center border-2 border-ink bg-emphasis">
+              <Plus size={14} strokeWidth={3.5} aria-hidden className="transition-transform group-open/more:rotate-45" />
+            </span>
+          </summary>
+          <dl className="mt-3 space-y-3">
             {project.implementation?.length > 0 && (
               <Detail label="Implementation">
                 <ul className="space-y-1">
@@ -119,52 +169,56 @@ export default function ProjectCard({ project, index }) {
               <Detail label="Results">
                 <ul className="space-y-1">
                   {project.results.map((r) => (
-                    <li key={r}>{r}</li>
+                    <li key={r} className="flex gap-2">
+                      <span aria-hidden className="font-black">→</span>
+                      <span>{r}</span>
+                    </li>
                   ))}
                 </ul>
               </Detail>
             )}
           </dl>
+        </details>
+      )}
 
-          {project.technologies?.length > 0 && (
-            <ul className="mt-5 flex flex-wrap gap-2" aria-label="Technologies">
-              {project.technologies.map((tech) => (
-                <li key={tech} className="chip">{tech}</li>
-              ))}
-            </ul>
-          )}
-          <Links project={project} />
-        </div>
+      {project.technologies?.length > 0 && (
+        <ul className="mt-4 flex flex-wrap gap-2" aria-label="Technologies">
+          {project.technologies.map((tech) => (
+            <li key={tech} className="chip">{tech}</li>
+          ))}
+        </ul>
+      )}
+      <Links project={project} />
+    </div>
+  );
+}
 
-        {(hasDiagram || image || architecture) && (
-          <div className={cx("space-y-4 border-t-4 border-ink p-5 sm:p-6", spans && "lg:border-l-4 lg:border-t-0", t.panel)}>
-            {image && (
-              <Image
-                src={image.src}
-                alt={image.alt}
-                width={image.width}
-                height={image.height}
-                sizes="(min-width: 1024px) 40vw, 100vw"
-                className="h-auto w-full border-[3px] border-ink"
-              />
-            )}
-            {architecture && (
-              <figure>
-                <figcaption className="mono mb-2">Architecture</figcaption>
-                <Image
-                  src={architecture.src}
-                  alt={architecture.alt}
-                  width={architecture.width}
-                  height={architecture.height}
-                  sizes="(min-width: 1024px) 40vw, 100vw"
-                  className="h-auto w-full border-[3px] border-ink"
-                />
-              </figure>
-            )}
-            {hasDiagram && <ProjectDiagram diagram={project.diagram} projectType={project.projectType} />}
+export default function ProjectCard({ project, index }) {
+  const showcase = Boolean(project.featured || project.wide);
+  const tilt = showcase ? "0deg" : index % 2 === 0 ? "-0.6deg" : "0.6deg";
+
+  return (
+    <article
+      id={project.id}
+      aria-labelledby={`${project.id}-title`}
+      className={cx("card relative flex scroll-mt-20 flex-col", showcase && "lg:col-span-2")}
+      style={{ "--tilt": tilt }}
+    >
+      <Tape index={index} />
+      <Header project={project} index={index} />
+      {showcase ? (
+        <div className="grid flex-1 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
+          <Body project={project} showcase />
+          <div>
+            <Media project={project} index={index} showcase />
           </div>
-        )}
-      </div>
+        </div>
+      ) : (
+        <>
+          <Media project={project} index={index} />
+          <Body project={project} />
+        </>
+      )}
     </article>
   );
 }

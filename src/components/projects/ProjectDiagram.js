@@ -1,19 +1,19 @@
-import { ArrowDown } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 function pad(n) {
   return String(n + 1).padStart(2, "0");
 }
 
-/** Chain of steps, drawn from `project.diagram`. Layout varies by project type. */
+/** Compact flow of steps from `project.diagram`; wraps onto several lines when needed. */
 export default function ProjectDiagram({ diagram, projectType }) {
   if (!diagram?.steps?.length) return null;
   const { label, kind, steps } = diagram;
 
   if (projectType === "devtool") {
     return (
-      <figure className="on-dark border-[3px] border-ink bg-ink p-4 text-ground">
-        <figcaption className="mono mb-3 text-emphasis">{`// ${label}`}</figcaption>
-        <ol className="mono space-y-1 !normal-case">
+      <figure className="on-dark border-[3px] border-ink bg-ink p-3 text-ground">
+        <figcaption className="mono mb-2 text-emphasis">{`// ${label}`}</figcaption>
+        <ol className="mono space-y-0.5 !normal-case">
           {steps.map((s, i) => (
             <li key={s} className="flex gap-3">
               <span className="text-field" aria-hidden>{pad(i)}</span>
@@ -28,36 +28,17 @@ export default function ProjectDiagram({ diagram, projectType }) {
     );
   }
 
-  if (kind === "set") {
-    return (
-      <figure>
-        <figcaption className="mono mb-2">{label}</figcaption>
-        <ul className="grid gap-2 sm:grid-cols-3">
-          {steps.map((s) => (
-            <li key={s} className="flow-step bg-emphasis">
-              {s}
-            </li>
-          ))}
-        </ul>
-      </figure>
-    );
-  }
-
   return (
     <figure>
       <figcaption className="mono mb-2">{label}</figcaption>
-      <ol>
+      <ol className="flex flex-wrap items-center gap-x-1.5 gap-y-2">
         {steps.map((s, i) => (
-          <li key={s}>
-            {i > 0 && (
-              <span className="flex h-6 justify-center" aria-hidden>
-                <ArrowDown size={22} strokeWidth={3.5} />
-              </span>
-            )}
-            <div className="flow-step">
-              <span className="mono mr-2 text-[length:var(--dp-typography-label)]">{pad(i)}</span>
+          <li key={s} className="flex items-center gap-1.5">
+            {kind !== "set" && i > 0 && <ArrowRight size={16} strokeWidth={3.5} aria-hidden className="shrink-0" />}
+            <span className="flow-step !px-2 !py-1 !text-[13px]">
+              {kind !== "set" && <span className="mono mr-1.5 !text-[11px]">{pad(i)}</span>}
               {s}
-            </div>
+            </span>
           </li>
         ))}
       </ol>

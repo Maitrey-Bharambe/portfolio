@@ -12,7 +12,7 @@
  *   achievement   string, e.g. "Runner-up"
  *   results       array of strings, ONLY verified outcomes
  *   diagram       { label, kind: "chain" | "set", steps: [] }
- *   architecture  same shape as image, for an architecture diagram
+ *   architecture  same shape as image plus optional caption (default "Architecture")
  *   image         { src: "/images/projects/x.png", alt: "...", width, height }
  *   githubUrl, liveUrl   strings or null (buttons are hidden when null)
  *   pendingNote   string shown on projectType "pending"
@@ -50,10 +50,10 @@ export const projects = [
       height: 900,
     },
     architecture: {
-      src: "/images/projects/nexlink-architecture.png",
-      alt: "NexLink architecture diagram: browser, one Next.js process with REST API, Agent API, relay, incident detector and AI provider, MongoDB, and two device agents linked by a direct UDP WireGuard path with a relay fallback.",
-      width: 1568,
-      height: 782,
+      src: "/images/projects/nexlink-architecture.webp",
+      alt: "NexLink architecture diagram: users, web console, backend services, MongoDB database, devices with direct UDP and encrypted relay paths, AI-powered operations, and the technology stack.",
+      width: 1536,
+      height: 1024,
     },
     githubUrl: "https://github.com/Maitrey-Bharambe/nexlinkk",
     liveUrl: "https://nexlink-maitrey.azurewebsites.net/welcome",
@@ -88,10 +88,11 @@ export const projects = [
       height: 500,
     },
     architecture: {
-      src: "/images/projects/factorymind-architecture.png",
-      alt: "FactoryMind AI three-tier architecture: browser front end, Next.js API routes with MongoDB, and a Python service hosting the trained models.",
-      width: 1582,
-      height: 894,
+      caption: "Live simulation",
+      src: "/images/projects/factorymind-simulation.webp",
+      alt: "FactoryMind AI live factory-floor simulation showing seven production cells, AGV routes, workpieces, a live event feed and production-flow KPIs.",
+      width: 2000,
+      height: 1053,
     },
     githubUrl: "https://github.com/SohamG2696/FactoryMind_AI",
     liveUrl: null,

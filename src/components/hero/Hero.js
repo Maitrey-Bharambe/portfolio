@@ -45,7 +45,7 @@ export default function Hero() {
           <div className="relative p-4 sm:p-8 lg:p-12">
             <h1
               id="hero-title"
-              className="display flex flex-col items-start text-[clamp(1.9rem,11vw,3.4rem)] sm:text-[clamp(1.9rem,9.2vw,7rem)] [&>span]:-mt-1 [&>span:first-child]:mt-0"
+              className="display flex flex-col items-start text-[clamp(1.9rem,11vw,3.4rem)] sm:text-[clamp(1.9rem,9.2vw,6rem)] [&>span]:-mt-1 [&>span:first-child]:mt-0"
             >
               {hero.lines.map((line, i) => (
                 <span
@@ -65,7 +65,7 @@ export default function Hero() {
 
             {/* Large screens: portrait in a full red panel, standing on the violet band. */}
             <div className="pointer-events-none absolute bottom-0 right-8 hidden border-4 border-b-0 border-ink bg-signal px-3 pt-8 lg:block xl:right-12 xl:px-4 xl:pt-10">
-              <Image src={portrait.src} alt={portrait.alt} width={portrait.width} height={portrait.height} sizes="300px" priority className="h-[310px] w-auto xl:h-[450px]" />
+              <Image src={portrait.src} alt={portrait.alt} width={portrait.width} height={portrait.height} sizes="300px" priority className="h-[310px] w-auto xl:h-[400px]" />
             </div>
 
             <div className="mt-8 grid gap-8 md:mt-12 lg:mr-[260px] lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] lg:items-end xl:mr-[340px]">

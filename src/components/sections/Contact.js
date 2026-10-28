@@ -11,7 +11,7 @@ export default function Contact() {
           style={{ boxShadow: "calc(var(--shadow) * 1.7) calc(var(--shadow) * 1.7) 0 var(--dp-color-ink)" }}
         >
           <p className="mono mb-4">06 / Contact</p>
-          <h2 id="contact-title" className="display text-[clamp(2rem,7.6vw,6rem)]">
+          <h2 id="contact-title" className="display text-[clamp(2rem,7.6vw,5rem)]">
             Got a good problem?
             <br />
             Let&rsquo;s build something.

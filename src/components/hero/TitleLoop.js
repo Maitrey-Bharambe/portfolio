@@ -7,6 +7,7 @@ import { loopTitles } from "@/data/profile";
 export default function TitleLoop() {
   return (
     <div className="overflow-x-clip py-2 text-ink md:py-4">
+      <div className="mx-auto max-w-[1400px]">
       <div style={{ width: "max(100%, 900px)", marginLeft: "calc(50% - max(50%, 450px))" }}>
         <CurvedLoop
           marqueeText={loopTitles.join(" / ")}
@@ -20,6 +21,7 @@ export default function TitleLoop() {
           color="var(--dp-color-ink)"
           pauseOnHover
         />
+      </div>
       </div>
     </div>
   );

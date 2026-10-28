@@ -56,25 +56,71 @@ export const identity = [
   },
 ];
 
-export const philosophy = [
+// Working principles, shown as a knowledge graph. `icon` is mapped to a Lucide icon in
+// PrinciplesGraph; the order is also the order of the iterative loop.
+export const principles = [
   {
     n: "01",
+    id: "understand",
+    icon: "database",
     title: "Understand the data",
-    text: "Understand data quality, structure, and limitations before trusting the output.",
+    text: "Understand what the data actually represents before trusting its output.",
+    points: ["Explore and clean data.", "Find patterns and relationships.", "Identify bias, gaps, and limitations."],
   },
   {
     n: "02",
-    title: "Build the pipeline",
-    text: "Reliable models depend on sound data processing and engineering.",
+    id: "knowledge",
+    icon: "network",
+    title: "Build the knowledge graph",
+    text: "Connect information into meaningful, structured domain knowledge.",
+    points: ["Link entities and concepts.", "Encode domain logic.", "Capture relationships and context."],
   },
   {
     n: "03",
-    title: "Question the output",
-    text: "Evaluate models critically and understand their limitations.",
+    id: "apply",
+    icon: "brain",
+    title: "Apply AI / ML",
+    text: "Choose the right intelligence for the problem instead of using a model just because it is fashionable.",
+    points: [
+      "Select suitable models and methods.",
+      "Apply ML, LLMs, and AI agents where useful.",
+      "Solve real-world problems.",
+    ],
   },
   {
     n: "04",
-    title: "Make it usable",
-    text: "Turn analytical results into tools, visualizations, and understandable interfaces.",
+    id: "evaluate",
+    icon: "gear",
+    title: "Evaluate & improve",
+    text: "Treat model outputs as hypotheses that must be tested and improved.",
+    points: ["Measure performance.", "Validate against real data.", "Iterate, optimize, and monitor."],
+  },
+  {
+    n: "05",
+    id: "deliver",
+    icon: "chart",
+    title: "Deliver impact",
+    text: "Turn analytical results into useful products and measurable outcomes.",
+    points: ["Build usable tools and interfaces.", "Create insights and automations.", "Focus on meaningful business value."],
+  },
+  {
+    n: "06",
+    id: "engineer",
+    icon: "code",
+    title: "Engineer & deploy",
+    text: "Build reliable, maintainable systems that work beyond a local experiment.",
+    points: [
+      "Create reproducible pipelines.",
+      "Use appropriate tools and cloud infrastructure.",
+      "Monitor, maintain, and scale.",
+    ],
+  },
+  {
+    n: "07",
+    id: "evolve",
+    icon: "bulb",
+    title: "Learn & evolve",
+    text: "Stay curious, challenge assumptions, and improve continuously.",
+    points: ["Explore emerging research.", "Learn new technologies.", "Refine approaches through feedback."],
   },
 ];

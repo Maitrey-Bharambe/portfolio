@@ -65,6 +65,22 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+/* Desktop: scale the whole layout down so it reads comfortably at 100% browser zoom.
+   rem-based sizes (spacing, headings) follow the root size; px tokens are reduced to match. */
+@media (min-width: 1100px) {
+  html {
+    font-size: 14px;
+  }
+  :root {
+    --dp-typography-body: 15px;
+    --dp-typography-reading: 14px;
+    --dp-typography-small: 13px;
+    --dp-typography-metadata: 12px;
+    --dp-typography-label: 11px;
+    --dp-shadow-offset: 6px;
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
@@ -123,7 +139,7 @@ section[id] {
   padding-block: 56px;
 }
 @media (min-width: 768px) {
-  .sec-pad { padding-block: 88px; }
+  .sec-pad { padding-block: 72px; }
 }
 
 /* ---------- type ---------- */
@@ -134,7 +150,7 @@ section[id] {
   text-transform: uppercase;
 }
 .h2 {
-  font-size: clamp(2.2rem, 7.4vw, 5.5rem);
+  font-size: clamp(2.2rem, 7.4vw, 4.75rem);
 }
 .emph {
   font-weight: var(--dp-typography-emphasis-weight);
@@ -250,6 +266,11 @@ section[id] {
   font-weight: var(--dp-typography-emphasis-weight);
   line-height: 1.15;
   text-transform: uppercase;
+}
+
+.num-outline {
+  color: transparent;
+  -webkit-text-stroke: 3px var(--dp-color-ink);
 }
 
 .stripe-racing {
