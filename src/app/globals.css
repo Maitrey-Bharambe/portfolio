@@ -291,3 +291,8 @@ section[id] {
   }
   .btn:hover, .card:hover { transform: none; }
 }
+
+/* Radial graph is drawn for ~1200px; shrink its contents on narrower desktops. */
+.graph-zoom { zoom: 0.65; }
+@media (min-width: 1024px) { .graph-zoom { zoom: 0.72; } }
+@media (min-width: 1180px) { .graph-zoom { zoom: 0.85; } }

@@ -187,7 +187,7 @@ export default function PrinciplesGraph() {
   return (
     <div ref={rootRef}>
       {/* Wide screens: radial graph */}
-      <div className="relative mx-auto hidden w-full max-w-[1180px] min-[1180px]:block" style={{ aspectRatio: `${W} / ${H}`, zoom: 0.85 }}>
+      <div className="relative mx-auto graph-zoom hidden w-full max-w-[1180px] min-[900px]:block" style={{ aspectRatio: `${W} / ${H}` }}>
         <svg viewBox={`0 0 ${W} ${H}`} className="absolute inset-0 h-full w-full" aria-hidden="true">
           {/* loop links between neighbouring principles */}
           {links.map((l, i) => {
@@ -290,7 +290,7 @@ export default function PrinciplesGraph() {
       </div>
 
       {/* Tablet and mobile: central node, a compact connection index, then the principles */}
-      <div className="min-[1180px]:hidden">
+      <div className="min-[900px]:hidden">
         <CenterNode className="mx-auto w-60 sm:w-72" />
         <div aria-hidden="true" className="mx-auto h-8 w-1 bg-ink" />
 

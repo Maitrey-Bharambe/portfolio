@@ -111,10 +111,6 @@ function drawFront(logo, photo, profile) {
   ctx.font = `800 40px ${MONO}`;
   ctx.fillText("DATA SCIENTIST / AI ENGINEER", px + 30, 1303);
 
-  ctx.fillStyle = INK;
-  ctx.font = `700 30px ${MONO}`;
-  ctx.fillText(profile.tagline.toUpperCase(), px, 1396);
-
   // card border
   ctx.lineWidth = 28;
   ctx.strokeStyle = INK;

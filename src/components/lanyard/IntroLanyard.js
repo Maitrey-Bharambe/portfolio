@@ -93,16 +93,18 @@ export default function IntroLanyard() {
 
   // After the card has flown into place, hand over to the hero's own lanyard.
   useEffect(() => {
-    if (phase !== "landing") return undefined;
-    const t1 = setTimeout(() => {
-      finish(true);
-      setPhase("leaving");
-    }, FLY_MS + 60);
-    const t2 = setTimeout(() => setPhase("done"), FLY_MS + 400);
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-    };
+    if (phase === "landing") {
+      const t = setTimeout(() => {
+        finish(true);
+        setPhase("leaving");
+      }, FLY_MS + 60);
+      return () => clearTimeout(t);
+    }
+    if (phase === "leaving") {
+      const t = setTimeout(() => setPhase("done"), 400);
+      return () => clearTimeout(t);
+    }
+    return undefined;
   }, [phase]);
 
   const skip = () => {
@@ -115,7 +117,7 @@ export default function IntroLanyard() {
   const flying = phase === "landing" || phase === "leaving";
 
   return (
-    <div className="intro-cover fixed inset-0 z-[200]" aria-hidden={flying ? "true" : undefined} role="presentation">
+    <div className={`intro-cover fixed inset-0 z-[200] ${flying ? "pointer-events-none" : ""}`} aria-hidden={flying ? "true" : undefined} role="presentation">
       <noscript>
         <style>{`.intro-cover{display:none!important}`}</style>
       </noscript>
