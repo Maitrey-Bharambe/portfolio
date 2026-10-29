@@ -9,6 +9,7 @@ import Philosophy from "@/components/sections/Philosophy";
 import Education from "@/components/sections/Education";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/footer/Footer";
+import IntroLanyard from "@/components/lanyard/IntroLanyard";
 
 // Re-render daily so the footer year stays current on static hosting.
 export const revalidate = 86400;
@@ -22,6 +23,7 @@ export default function Home() {
       >
         Skip to content
       </a>
+      <IntroLanyard />
       <Navbar />
       <main id="main">
         <Hero />

@@ -1,14 +1,7 @@
-import Image from "next/image";
 import { ArrowDownRight, Download } from "lucide-react";
 import { hero } from "@/data/profile";
 import Button from "@/components/ui/Button";
-
-const portrait = {
-  src: "/images/profile/maitrey.webp",
-  alt: "Maitrey Bharambe in a navy blazer and white shirt, arms crossed, smiling.",
-  width: 923,
-  height: 1440,
-};
+import HeroLanyard from "@/components/lanyard/HeroLanyard";
 
 const stripStyles = [
   "bg-ink text-emphasis",
@@ -58,15 +51,8 @@ export default function Hero() {
             </h1>
             <ArrowTile className="absolute right-[19rem] top-10 hidden h-24 w-24 rotate-6 lg:grid xl:right-[23rem] xl:h-28 xl:w-28" />
 
-            {/* Small screens: framed portrait under the headline. */}
-            <div className="mx-auto mt-6 w-56 overflow-hidden border-4 border-ink bg-signal pt-6 sm:w-64 lg:hidden" style={{ boxShadow: "var(--shadow) var(--shadow) 0 var(--dp-color-ink)" }}>
-              <Image src={portrait.src} alt={portrait.alt} width={portrait.width} height={portrait.height} sizes="256px" priority className="mx-auto h-auto w-[88%]" />
-            </div>
-
-            {/* Large screens: portrait in a full red panel, standing on the violet band. */}
-            <div className="pointer-events-none absolute bottom-0 right-8 hidden border-4 border-b-0 border-ink bg-signal px-3 pt-6 lg:block xl:right-10 xl:px-4 xl:pt-8">
-              <Image src={portrait.src} alt={portrait.alt} width={portrait.width} height={portrait.height} sizes="300px" priority className="h-[290px] w-auto xl:h-[380px]" />
-            </div>
+            {/* Portrait slot: the intro lanyard lands here, then hangs live. */}
+            <HeroLanyard />
 
             <div className="mt-8 grid gap-8 md:mt-10 lg:mt-8 lg:mr-[250px] lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] lg:items-end xl:mr-[310px]">
               <p className="poster bg-contrast p-5 text-[length:var(--dp-typography-body)] leading-snug lg:-rotate-1">
