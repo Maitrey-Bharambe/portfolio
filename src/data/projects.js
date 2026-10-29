@@ -113,7 +113,14 @@ export const projects = [
       "Explainable recommendations for moderators.",
     ],
     technologies: ["Python", "Scikit-learn", "Random Forest", "RAG"],
+    logo: { src: "/logos/tcs.webp", alt: "Tata Consultancy Services logo", width: 612, height: 192 },
     achievement: "Runner-up",
+    achievementProof: {
+      src: "/certificates/tcs-tech-day.webp",
+      alt: "TCS Tech Day 2026 certificate of appreciation presented to Maitrey Bharambe as runner-up, with the Runners-up trophy.",
+      width: 1080,
+      height: 1102,
+    },
     results: null,
     diagram: {
       label: "Message-to-action flow",

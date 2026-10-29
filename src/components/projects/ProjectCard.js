@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ArrowUpRight, Plus } from "lucide-react";
 import Button from "@/components/ui/Button";
 import ProjectDiagram from "./ProjectDiagram";
+import CertificateViewer from "@/components/experience/CertificateViewer";
 import { cx } from "@/lib/utils";
 
 // Colour of the visual panel per project type.
@@ -26,7 +27,7 @@ function Detail({ label, children }) {
 }
 
 function Links({ project }) {
-  if (!project.githubUrl && !project.liveUrl) return null;
+  if (!project.githubUrl && !project.liveUrl && !project.achievementProof) return null;
   return (
     <div className="mt-auto flex flex-wrap gap-3 pt-5">
       {project.githubUrl && (
@@ -38,6 +39,14 @@ function Links({ project }) {
         <Button href={project.liveUrl} external small variant="yellow">
           Live demo <ArrowUpRight size={16} strokeWidth={3} aria-hidden />
         </Button>
+      )}
+      {project.achievementProof && (
+        <CertificateViewer
+          certificate={project.achievementProof}
+          label={project.name}
+          kind={`${project.achievement} certificate`}
+          buttonLabel="View achievement"
+        />
       )}
     </div>
   );
@@ -122,6 +131,14 @@ function Body({ project, showcase }) {
   const hasMore = project.implementation?.length > 0 || project.contribution || project.results?.length > 0;
   return (
     <div className="flex flex-1 flex-col p-4 sm:p-5">
+      {project.logo && (
+        <div
+          className="mb-3 inline-flex h-11 items-center self-start border-[3px] border-ink bg-ink px-3"
+          style={{ boxShadow: "3px 3px 0 var(--dp-color-ink)" }}
+        >
+          <Image src={project.logo.src} alt={project.logo.alt} width={project.logo.width} height={project.logo.height} className="h-8 w-auto" />
+        </div>
+      )}
       <h3
         id={`${project.id}-title`}
         className={cx(
