@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowDownRight } from "lucide-react";
+import { ArrowDownRight, Download } from "lucide-react";
 import { hero } from "@/data/profile";
 import Button from "@/components/ui/Button";
 
@@ -42,10 +42,10 @@ export default function Hero() {
             <ArrowTile className="h-9 w-9 shrink-0 !shadow-none lg:hidden" />
           </div>
 
-          <div className="relative p-4 sm:p-8 lg:p-12">
+          <div className="relative p-4 sm:p-8 lg:p-10">
             <h1
               id="hero-title"
-              className="display flex flex-col items-start text-[clamp(1.9rem,11vw,3.4rem)] sm:text-[clamp(1.9rem,9.2vw,6rem)] [&>span]:-mt-1 [&>span:first-child]:mt-0"
+              className="display flex flex-col items-start text-[clamp(1.9rem,11vw,3.4rem)] sm:text-[clamp(1.9rem,9.2vw,6rem)] lg:text-[clamp(2.4rem,4.6vw,4.1rem)] [&>span]:-mt-1 [&>span:first-child]:mt-0"
             >
               {hero.lines.map((line, i) => (
                 <span
@@ -56,7 +56,7 @@ export default function Hero() {
                 </span>
               ))}
             </h1>
-            <ArrowTile className="absolute right-12 top-12 hidden h-32 w-32 rotate-6 lg:grid xl:h-36 xl:w-36" />
+            <ArrowTile className="absolute right-[19rem] top-10 hidden h-24 w-24 rotate-6 lg:grid xl:right-[23rem] xl:h-28 xl:w-28" />
 
             {/* Small screens: framed portrait under the headline. */}
             <div className="mx-auto mt-6 w-56 overflow-hidden border-4 border-ink bg-signal pt-6 sm:w-64 lg:hidden" style={{ boxShadow: "var(--shadow) var(--shadow) 0 var(--dp-color-ink)" }}>
@@ -64,17 +64,17 @@ export default function Hero() {
             </div>
 
             {/* Large screens: portrait in a full red panel, standing on the violet band. */}
-            <div className="pointer-events-none absolute bottom-0 right-8 hidden border-4 border-b-0 border-ink bg-signal px-3 pt-8 lg:block xl:right-12 xl:px-4 xl:pt-10">
-              <Image src={portrait.src} alt={portrait.alt} width={portrait.width} height={portrait.height} sizes="300px" priority className="h-[310px] w-auto xl:h-[400px]" />
+            <div className="pointer-events-none absolute bottom-0 right-8 hidden border-4 border-b-0 border-ink bg-signal px-3 pt-6 lg:block xl:right-10 xl:px-4 xl:pt-8">
+              <Image src={portrait.src} alt={portrait.alt} width={portrait.width} height={portrait.height} sizes="300px" priority className="h-[290px] w-auto xl:h-[380px]" />
             </div>
 
-            <div className="mt-8 grid gap-8 md:mt-12 lg:mr-[260px] lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] lg:items-end xl:mr-[340px]">
+            <div className="mt-8 grid gap-8 md:mt-10 lg:mt-8 lg:mr-[250px] lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] lg:items-end xl:mr-[310px]">
               <p className="poster bg-contrast p-5 text-[length:var(--dp-typography-body)] leading-snug lg:-rotate-1">
                 {hero.intro}
               </p>
               <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap lg:flex-col lg:items-start">
-                <Button href="#work" variant="ink">
-                  Explore my work
+                <Button href="/Maitrey-Bharambe-Resume.pdf" variant="ink" download="Maitrey-Bharambe-Resume.pdf">
+                  <Download size={18} strokeWidth={3} aria-hidden /> Download resume
                 </Button>
                 <Button href="#contact" variant="light">
                   Get in touch

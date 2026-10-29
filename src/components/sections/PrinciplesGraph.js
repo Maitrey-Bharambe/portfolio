@@ -187,7 +187,7 @@ export default function PrinciplesGraph() {
   return (
     <div ref={rootRef}>
       {/* Wide screens: radial graph */}
-      <div className="relative mx-auto hidden w-full min-[1180px]:block" style={{ aspectRatio: `${W} / ${H}` }}>
+      <div className="relative mx-auto hidden w-full max-w-[1180px] min-[1180px]:block" style={{ aspectRatio: `${W} / ${H}`, zoom: 0.85 }}>
         <svg viewBox={`0 0 ${W} ${H}`} className="absolute inset-0 h-full w-full" aria-hidden="true">
           {/* loop links between neighbouring principles */}
           {links.map((l, i) => {

@@ -46,8 +46,8 @@ export const identity = [
   },
   {
     n: "03",
-    title: "Data Systems",
-    text: "ETL pipelines, data processing, and information retrieval.",
+    title: "System Design",
+    text: "Agentic systems and multi-agent workflows, designed end to end.",
   },
   {
     n: "04",

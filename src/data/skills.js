@@ -22,8 +22,6 @@ export const skills = [
       "TensorFlow/Keras",
       "RAG",
       "Embeddings",
-      "LangChain",
-      "LangGraph",
       "React.js",
       "Node.js",
       "REST APIs",
@@ -31,5 +29,15 @@ export const skills = [
       "Git",
       "GitHub",
     ],
+  },
+  {
+    title: "Agentic AI and LLMs",
+    accent: "violet",
+    items: ["CrewAI", "Ollama", "LangChain", "LangGraph", "Multi-agent workflows", "Local LLMs", "Sentence Transformers"],
+  },
+  {
+    title: "System Design",
+    accent: "yellow",
+    items: ["System design", "Agentic systems", "RAG architecture", "REST API design", "Dockerized deployment"],
   },
 ];

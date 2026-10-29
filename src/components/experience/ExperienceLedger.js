@@ -1,7 +1,26 @@
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import CertificateViewer from "./CertificateViewer";
 import { experience } from "@/data/experience";
 import SectionHeading from "@/components/ui/SectionHeading";
+
+function CompanyMark({ entry }) {
+  if (!entry.logo && !entry.mark) return null;
+  return (
+    <div
+      className={`grid h-16 w-24 shrink-0 place-items-center border-[3px] border-ink p-2 md:h-20 md:w-32 ${entry.logo?.dark ? "bg-ink" : "bg-contrast"}`}
+      style={{ boxShadow: "3px 3px 0 var(--dp-color-ink)" }}
+    >
+      {entry.logo ? (
+        <span className="relative block h-full w-full">
+          <Image src={entry.logo.src} alt={entry.logo.alt} fill sizes="128px" className="object-contain" />
+        </span>
+      ) : (
+        <span aria-hidden="true" className="display text-xl md:text-2xl">{entry.mark}</span>
+      )}
+    </div>
+  );
+}
 
 export default function ExperienceLedger() {
   return (
@@ -31,9 +50,12 @@ export default function ExperienceLedger() {
 
               <div className="p-5 md:p-6">
                 <div className="flex flex-wrap items-start justify-between gap-3">
-                  <div>
+                  <div className="flex items-center gap-4">
+                    <CompanyMark entry={e} />
+                    <div>
                     <h3 className="text-2xl font-black uppercase leading-none tracking-tight md:text-3xl">{e.role}</h3>
                     <p className="mt-2 text-[length:var(--dp-typography-body)] font-extrabold">{e.organization}</p>
+                    </div>
                   </div>
                   {e.certificate && <CertificateViewer certificate={e.certificate} label={e.organization.split(",")[0].replace(/^The /, "")} />}
                 </div>

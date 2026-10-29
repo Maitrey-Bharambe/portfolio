@@ -56,7 +56,7 @@ function Tape({ index }) {
   );
 }
 
-function Header({ project, index }) {
+function Header({ project, index, compact }) {
   return (
     <div className="flex items-start justify-between gap-3 border-b-4 border-ink px-4 pb-3 pt-5 sm:px-5">
       <span className="num-outline display text-6xl leading-[0.8] sm:text-7xl" aria-hidden="true">
@@ -89,12 +89,12 @@ function Media({ project, index, showcase }) {
       className={cx(
         "flex h-full flex-col justify-center gap-6 border-b-4 border-ink p-4 sm:p-5",
         panelColor[project.projectType] ?? panelColor.software,
-        showcase ? "lg:border-b-0 lg:p-6" : "min-h-[190px]",
+        showcase ? "lg:border-b-0 lg:gap-5 lg:p-4" : "min-h-[190px]",
         showcase && "lg:border-l-4"
       )}
     >
       {shots.map((shot, i) => (
-        <figure key={shot.src} className={cx("relative", showcase && (i % 2 === 0 ? "lg:-rotate-1" : "lg:rotate-1"))}>
+        <figure key={shot.src} className={cx("relative", showcase && "lg:mx-auto lg:max-w-[88%]", showcase && (i % 2 === 0 ? "lg:-rotate-1" : "lg:rotate-1"))}>
           <Image
             src={shot.src}
             alt={shot.alt}
@@ -126,7 +126,7 @@ function Body({ project, showcase }) {
         id={`${project.id}-title`}
         className={cx(
           "display",
-          showcase ? "text-[clamp(2.2rem,5vw,3.4rem)]" : "min-h-[1.84em] text-[clamp(1.9rem,3.4vw,2.8rem)]"
+          showcase ? "text-[clamp(1.9rem,4vw,2.6rem)]" : "min-h-[1.84em] text-[clamp(1.9rem,3.4vw,2.8rem)]"
         )}
       >
         {project.name}
@@ -205,9 +205,9 @@ export default function ProjectCard({ project, index }) {
       style={{ "--tilt": tilt }}
     >
       <Tape index={index} />
-      <Header project={project} index={index} />
+      <Header project={project} index={index} compact={showcase} />
       {showcase ? (
-        <div className="grid flex-1 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
+        <div className="grid flex-1 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,0.8fr)]">
           <Body project={project} showcase />
           <div>
             <Media project={project} index={index} showcase />
